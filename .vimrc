@@ -20,6 +20,9 @@ Plugin 'kien/ctrlp.vim'
 "Vue component highlight
 Plugin 'posva/vim-vue'
 
+"Colorscheme
+Plugin 'crusoexia/vim-monokai'
+
 "All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
