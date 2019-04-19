@@ -2,7 +2,7 @@
 
 ## **Clone the repo**
 
-    git clone https://github.com/jonable/dotfiles.git ~/Projects/
+    git clone https://github.com/jonable/dotfiles.git ~/Projects/dotfiles
 
 ## **.vimrc setup**
 
@@ -14,3 +14,4 @@
 
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
+*open vim and run :PluginInstall*
