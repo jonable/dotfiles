@@ -23,6 +23,8 @@ Plugin 'posva/vim-vue'
 "Colorscheme
 Plugin 'crusoexia/vim-monokai'
 
+"Commenting
+Plugin 'tpope/vim-commentary'
 "All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -59,7 +61,7 @@ set backspace=indent,eol,start
 set number
 "Show matches as typing
 set incsearch
-"set hlsearch
+set hlsearch
 "Keeps status bar active and lets the Statusbar plugin handle the mode 
 set laststatus=2
 set noshowmode
@@ -122,6 +124,16 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_mode="passive"
 let g:syntastic_enable_signs=0
 nnoremap <F7> :SyntasticCheck<CR> :lopen<CR>
+" Lightline
+let g:lightline = {
+      \ 'component_function': {
+      \   'filename': 'LightLineFilename'
+      \ }
+      \ }
+function! LightLineFilename()
+  " return expand('%:p:h:t')
+    return expand('%:h:t') . '/' . expand('%:t')
+endfunction
 
 "Custom Commands
 command! PrettyJson :%!python -m json.tool
@@ -129,3 +141,14 @@ command! PrettyJson :%!python -m json.tool
 "Custom Key Bindings
 map <Enter> i<CR>
 map <S-Enter> i<S-CR>
+" noremap <C-?> gcc
+nnoremap <esc><esc> :silent! nohls<cr>
+
+"Change Cursor based on mode
+let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+
+
+
+
