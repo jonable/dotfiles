@@ -25,6 +25,10 @@ Plugin 'crusoexia/vim-monokai'
 
 "Commenting
 Plugin 'tpope/vim-commentary'
+
+"TagBar
+Plugin 'majutsushi/tagbar'
+
 "All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -109,11 +113,25 @@ au BufNewFile,BufRead *.js, *.html, *.css
 "directory of hte current file
 "c==Directory of the current file
 let g:ctrlp_working_path_mode = 'ra'
-
+" Ignore some folders and files for CtrlP indexing
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\.git$\|\.yardoc\|public$|log\|tmp$',
+  \ 'file': '\.so$\|\.dat$|\.DS_Store$'
+  \ }
+let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
 "Postva/vim-vue
 "disable preprocessor checking
  let g:vue_disable_pre_processors=1
 
+"netrw
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 2
+let g:netrw_winsize = 90
+let g:netrw_altv = 1
+let g:netrw_list_hide= '.*\.swp$,.DS_Store'
 "Syntastic
 "let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
 " Syntastic
@@ -135,6 +153,13 @@ function! LightLineFilename()
     return expand('%:h:t') . '/' . expand('%:t')
 endfunction
 
+"Tagbar
+nmap <Leader>r :TagbarToggle<CR>
+
+"Netrw
+nmap <Leader>k :Lexplore<CR>
+nmap <Leader>K :Vexplore<CR>
+
 "Custom Commands
 command! PrettyJson :%!python -m json.tool
 
@@ -143,6 +168,11 @@ map <Enter> i<CR>
 map <S-Enter> i<S-CR>
 " noremap <C-?> gcc
 nnoremap <esc><esc> :silent! nohls<cr>
+"Map split resize
+nnoremap <silent> <Leader>= :exe "resize " . (winheight(0) * 3/2)<CR>
+nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
+nnoremap <silent> <Leader>0 :exe "vertical resize " . (winwidth(0) * 3/2)<CR>
+nnoremap <silent> <Leader>9 :exe "vertical resize " . (winwidth(0) * 2/3)<CR>
 
 "Change Cursor based on mode
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
